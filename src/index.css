@@ -1,0 +1,799 @@
+:root {
+  --bg-dark: #020f01;
+  --bg-skills-dark: #020904;
+  --accent-emerald: #10b981;
+  --accent-mint: #34d399;
+  --text-white: #ffffff;
+  
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display-sleek: 'Syncopate', 'Space Grotesk', -apple-system, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: var(--bg-dark);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--bg-dark);
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #71717a;
+}
+
+/* =========================================
+   HERO SECTION (Sticky Canvas Video Track)
+   ========================================= */
+
+.hero-scroll-track {
+  position: relative;
+  width: 100%;
+  height: 380vh; /* Scroll track driving the 179 frames */
+  background-color: var(--bg-dark);
+}
+
+.hero-sticky-viewport {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-dark);
+  z-index: 10;
+}
+
+.hero-canvas-wrapper {
+  position: absolute;
+  inset: -12px;
+  overflow: hidden;
+}
+
+.canvas-element {
+  width: 100%;
+  height: 100%;
+  display: block;
+  will-change: filter;
+  transition: filter 0.08s ease-out;
+}
+
+/* =========================================
+   HERO REFERENCE OVERLAY (ANUPAM & FRAMING)
+   ========================================= */
+
+.hero-reference-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 44px 54px;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Top Row */
+.hero-ref-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-ref-tag {
+  font-family: var(--font-sans);
+  font-size: clamp(12.5px, 0.95vw, 14px);
+  font-weight: 500;
+  color: var(--text-white);
+  letter-spacing: 0.06em;
+  opacity: 0.92;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
+}
+
+.hero-ref-arrow {
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
+}
+
+/* Sleek Broad Thin ANUPAM Title */
+.hero-ref-center-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(14px, 3.2vw, 56px);
+  width: 100%;
+  font-family: var(--font-display-sleek);
+  font-size: clamp(34px, 8.5vw, 130px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  user-select: none;
+  margin: auto 0;
+  text-align: center;
+  transform: translateY(-4px);
+}
+
+.hero-letter {
+  display: inline-block;
+  transition: all 0.3s ease;
+  font-weight: 400;
+}
+
+/* Outer solid letters: thin, elegant, pure white */
+.hero-letter.solid {
+  color: var(--text-white);
+  font-weight: 400;
+  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.7);
+}
+
+/* Inner transparent letters: thin 1px crisp outline so portrait is 100% visible */
+.hero-letter.outline {
+  color: transparent;
+  font-weight: 400;
+  -webkit-text-stroke: 1.1px var(--text-white);
+  text-stroke: 1.1px var(--text-white);
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.8));
+}
+
+/* Bottom Row */
+.hero-ref-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.hero-ref-name {
+  font-family: var(--font-sans);
+  font-size: clamp(12.5px, 0.95vw, 14px);
+  font-weight: 500;
+  color: var(--text-white);
+  letter-spacing: 0.06em;
+  opacity: 0.92;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.25;
+}
+
+.hero-ref-role {
+  font-family: var(--font-sans);
+  font-size: clamp(12.5px, 0.95vw, 14px);
+  font-weight: 500;
+  color: var(--text-white);
+  letter-spacing: 0.06em;
+  opacity: 0.92;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
+}
+
+/* =========================================
+   HERO 3D PERSPECTIVE SCROLLING TEXT
+   (Positioned on Left Side with Inward 3D Tilt - Thinner Width)
+   ========================================= */
+
+.hero-perspective-text-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: auto;
+  width: 38%;
+  max-width: 480px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 16px 0 clamp(28px, 4.2vw, 60px);
+  pointer-events: none;
+  z-index: 16;
+  perspective: 750px;
+}
+
+.hero-perspective-text-3d {
+  width: 100%;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.hero-perspective-paragraph {
+  font-family: var(--font-sans);
+  font-size: clamp(17.5px, 1.48vw, 22.5px);
+  font-weight: 500;
+  line-height: 1.46;
+  letter-spacing: -0.015em;
+  color: #f8fafc;
+  text-align: left;
+  text-shadow: 0 4px 26px rgba(0, 0, 0, 0.95), 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.hero-perspective-paragraph + .hero-perspective-paragraph {
+  margin-top: clamp(14px, 1.8vh, 22px);
+}
+
+.hero-perspective-paragraph .highlight-text {
+  color: var(--accent-mint);
+  font-weight: 600;
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+/* =========================================
+   3D PERSPECTIVE HORIZONTAL SKILLS (DARK)
+   ========================================= */
+
+.horizontal-skills-section-dark {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  background: radial-gradient(ellipse at 50% 25%, #062310 0%, #020c05 50%, #010602 100%);
+  color: #f8fafc;
+  border-top: 1px solid rgba(52, 211, 153, 0.2);
+  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+
+.skills-dark-ambient-bg {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 15% 40%, rgba(16, 185, 129, 0.07) 0%, transparent 45%),
+    radial-gradient(circle at 85% 60%, rgba(5, 150, 105, 0.06) 0%, transparent 45%),
+    linear-gradient(rgba(52, 211, 153, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(52, 211, 153, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+  pointer-events: none;
+}
+
+.horizontal-skills-viewport {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 16px;
+  padding: 24px 0 28px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Header Row */
+.horizontal-skills-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 54px;
+  position: relative;
+  z-index: 30;
+  flex-shrink: 0;
+}
+
+.tech-dark-title {
+  font-size: clamp(28px, 3.6vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #f8fafc;
+  line-height: 1.1;
+}
+
+/* Horizontal Scrub Progress Indicator */
+.horizontal-progress-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(4, 18, 8, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.progress-bar-track {
+  width: 80px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent-mint);
+  border-radius: 999px;
+  box-shadow: 0 0 8px var(--accent-mint);
+  transition: width 0.1s linear;
+}
+
+.progress-pct-num {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #ffffff;
+  min-width: 32px;
+}
+
+/* =========================================
+   3D PERSPECTIVE STAGE & TILTED CARDS
+   ========================================= */
+
+.perspective-3d-stage {
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 20;
+  overflow: visible;
+  padding-bottom: 24px;
+}
+
+.horizontal-cards-track {
+  display: flex;
+  gap: 32px;
+  padding: 10px 54px 20px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  align-items: center;
+}
+
+/* 3D Tilted Card: Pops OUT of the screen without bottom clipping! */
+.spatial-3d-card {
+  width: var(--card-width, 460px);
+  flex-shrink: 0;
+  transform-style: preserve-3d;
+  /* Ergonomic Perspective Tilt */
+  transform: rotateY(-10deg) rotateX(4deg) translateZ(16px);
+  transition: 
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+    border-color 0.3s ease;
+  background: rgba(6, 22, 11, 0.76);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(52, 211, 153, 0.22);
+  border-radius: 22px;
+  padding: 22px 24px;
+  box-shadow: 
+    0 24px 60px -12px rgba(0, 0, 0, 0.85),
+    -10px 16px 36px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 0 20px rgba(16, 185, 129, 0.04);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 3D Hover: Pops forward towards user */
+.spatial-3d-card:hover {
+  transform: rotateY(-2deg) rotateX(2deg) translateZ(65px) scale(1.02);
+  border-color: rgba(52, 211, 153, 0.6);
+  box-shadow: 
+    0 36px 80px -10px rgba(0, 0, 0, 0.95),
+    0 0 40px rgba(16, 185, 129, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Featured DevOps & Cloud 3D Card */
+.spatial-card-devops {
+  background: rgba(8, 30, 15, 0.86);
+  border: 1.5px solid rgba(52, 211, 153, 0.45);
+  box-shadow: 
+    0 28px 70px -12px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(16, 185, 129, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.spatial-card-devops:hover {
+  transform: rotateY(-2deg) rotateX(2deg) translateZ(75px) scale(1.02);
+  border-color: #34d399;
+  box-shadow: 
+    0 40px 90px -10px rgba(0, 0, 0, 0.95),
+    0 0 50px rgba(52, 211, 153, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.devops-3d-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px;
+  background: #059669;
+  color: #ffffff;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  align-self: flex-start;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.4);
+  transform: translateZ(15px);
+}
+
+.star-bounce {
+  color: #fef08a;
+  animation: star-pulse 2s infinite ease-in-out;
+}
+
+@keyframes star-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+/* Card Header */
+.spatial-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+  transform: translateZ(12px);
+}
+
+.spatial-category-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-mint);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.spatial-badge-dot {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.spatial-cat-badge {
+  text-transform: uppercase;
+  color: #94a3b8;
+  font-size: 10px;
+}
+
+.spatial-cat-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: #f8fafc;
+  letter-spacing: -0.01em;
+  margin-bottom: 3px;
+}
+
+.spatial-cat-desc {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #94a3b8;
+  max-width: 440px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.spatial-tools-count {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  background: rgba(52, 211, 153, 0.1);
+  color: var(--accent-mint);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  padding: 3px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Tools Grid with 3D Pop (Compact & Never Clipped) */
+.spatial-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  transform: translateZ(20px);
+}
+
+.devops-grid-extended {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+/* Individual Compact Tool Chip */
+.spatial-tool-item {
+  background: rgba(3, 15, 7, 0.75);
+  border: 1px solid rgba(52, 211, 153, 0.16);
+  border-radius: 11px;
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  min-height: 42px;
+}
+
+.spatial-tool-item:hover {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: rgba(52, 211, 153, 0.5);
+  transform: translateZ(32px) scale(1.02);
+  box-shadow: 0 6px 16px -2px rgba(16, 185, 129, 0.25);
+}
+
+.spatial-tool-icon-box {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.spatial-tool-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.spatial-tool-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.spatial-tool-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #f8fafc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spatial-tool-pill {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-mint);
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  padding: 0 5px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.spatial-tool-detail {
+  font-size: 10px;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
+/* Minimalist Canvas Preloader */
+.react-canvas-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: var(--bg-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
+}
+
+.react-canvas-loader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.loader-track {
+  width: 160px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.loader-fill {
+  height: 100%;
+  background: var(--accent-mint);
+  border-radius: 999px;
+  transition: width 0.08s ease-out;
+  box-shadow: 0 0 10px var(--accent-mint);
+}
+
+.loader-num {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  font-family: var(--font-mono);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* =========================================
+   RESPONSIVE (DESKTOP & MOBILE MEDIA QUERIES)
+   ========================================= */
+
+@media (max-width: 1024px) {
+  .hero-perspective-text-wrapper {
+    width: 44%;
+    max-width: 430px;
+    padding: 0 16px 0 32px;
+    perspective: 650px;
+  }
+  .hero-perspective-paragraph {
+    font-size: clamp(15.5px, 1.9vw, 19.5px);
+    line-height: 1.44;
+  }
+  .hero-perspective-paragraph + .hero-perspective-paragraph {
+    margin-top: 12px;
+  }
+  .horizontal-skills-header-row {
+    padding: 0 32px;
+  }
+  .horizontal-cards-track {
+    padding: 10px 32px 20px;
+    gap: 24px;
+  }
+}
+
+/* FULL MOBILE RESPONSIVE ADAPTATION */
+@media (max-width: 768px) {
+  .hero-perspective-text-wrapper {
+    width: 90%;
+    max-width: 100%;
+    left: 5%;
+    right: auto;
+    top: auto;
+    bottom: 24px;
+    height: auto;
+    padding: 0;
+    align-items: flex-end;
+    perspective: none;
+  }
+  .hero-perspective-paragraph {
+    font-size: clamp(14px, 3.8vw, 16.5px);
+    line-height: 1.4;
+  }
+  .hero-perspective-paragraph + .hero-perspective-paragraph {
+    margin-top: 10px;
+  }
+  .horizontal-skills-section-dark {
+    min-height: auto;
+    height: auto;
+    padding: 60px 0 80px;
+    overflow: visible;
+  }
+
+  .horizontal-skills-viewport {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    padding: 0;
+    overflow: visible;
+    gap: 20px;
+  }
+
+  .horizontal-skills-header-row {
+    padding: 0 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  /* Native Touch Swipeable Runway */
+  .perspective-3d-stage {
+    perspective: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: 10px 0 24px;
+    width: 100%;
+  }
+
+  /* Custom minimal scrollbar on mobile */
+  .perspective-3d-stage::-webkit-scrollbar {
+    height: 4px;
+  }
+  .perspective-3d-stage::-webkit-scrollbar-thumb {
+    background: rgba(52, 211, 153, 0.3);
+    border-radius: 999px;
+  }
+
+  .horizontal-cards-track {
+    display: flex;
+    gap: 16px;
+    padding: 0 20px 16px;
+    width: max-content;
+    transform: none !important;
+  }
+
+  .spatial-3d-card {
+    width: 86vw !important;
+    max-width: 360px !important;
+    scroll-snap-align: center;
+    transform: none !important;
+    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.7);
+    padding: 20px 18px;
+  }
+
+  .spatial-3d-card:hover {
+    transform: none !important;
+  }
+
+  .spatial-card-devops {
+    width: 86vw !important;
+    max-width: 360px !important;
+  }
+
+  .spatial-tools-grid, .devops-grid-extended {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    transform: none;
+  }
+
+  .hero-reference-overlay {
+    padding: 24px 20px;
+  }
+
+  .hero-ref-center-title {
+    font-size: clamp(28px, 9.5vw, 64px);
+    gap: clamp(6px, 1.8vw, 16px);
+  }
+
+  .hero-letter.outline {
+    -webkit-text-stroke: 0.9px var(--text-white);
+  }
+
+  .hero-ref-tag, .hero-ref-name, .hero-ref-role {
+    font-size: clamp(10.5px, 2.7vw, 12px);
+    letter-spacing: 0.04em;
+  }
+
+  .hero-ref-bottom-row {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+}
