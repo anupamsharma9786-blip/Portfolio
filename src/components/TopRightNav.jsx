@@ -10,13 +10,9 @@ const NAV_ITEMS = [
 
 export default function TopRightNav() {
   const [activeSection, setActiveSection] = useState('about');
-  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     function handleScroll() {
-      const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 40);
-
       // Section detection
       const sections = ['contact', 'experience', 'projects', 'skills'];
       let current = 'about';
@@ -55,10 +51,12 @@ export default function TopRightNav() {
     }
   };
 
+  const isLightSection = activeSection === 'projects' || activeSection === 'contact';
+
   return (
     <nav
-      className={`fixed-topright-nav ${isScrolled ? 'scrolled-dock' : 'hero-dock'}`}
-      aria-label="Permanent Site Navigation"
+      className={`fixed-topright-nav ${isLightSection ? 'theme-light' : 'theme-dark'}`}
+      aria-label="Site Navigation"
     >
       {NAV_ITEMS.map((item) => {
         const isActive = activeSection === item.id;
@@ -78,4 +76,3 @@ export default function TopRightNav() {
     </nav>
   );
 }
-

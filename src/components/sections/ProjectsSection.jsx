@@ -33,7 +33,7 @@ const PROJECTS_DATA = [
       { name: 'Node.js', devicon: 'devicon-nodejs-plain colored' },
       { name: 'Express.js', devicon: 'devicon-express-original' },
       { name: 'MongoDB', devicon: 'devicon-mongodb-plain colored' },
-      { name: 'Google MediaPipe', badge: 'AI Vision' },
+      { name: 'Google MediaPipe' },
     ],
     features: [
       'Real-time webcam integration.',
@@ -64,8 +64,8 @@ const PROJECTS_DATA = [
       { name: 'React.js', devicon: 'devicon-react-original colored' },
       { name: 'JavaScript', devicon: 'devicon-javascript-plain colored' },
       { name: 'CSS3', devicon: 'devicon-css3-plain colored' },
-      { name: 'Window Manager', badge: 'Interactive' },
-      { name: 'Spatial UI', badge: 'Desktop' },
+      { name: 'Window Manager' },
+      { name: 'Spatial UI' },
     ],
     features: [
       'Desktop-style interface using React.',
@@ -92,10 +92,10 @@ const PROJECTS_DATA = [
     description:
       'An AI-powered image analysis platform designed to identify whether an uploaded image may have been generated using artificial intelligence.',
     technologies: [
-      { name: 'Computer Vision', badge: 'Proposed' },
-      { name: 'Deep Learning', badge: 'Proposed' },
-      { name: 'Image Analysis Pipeline', badge: 'Proposed' },
-      { name: 'Configurable Architecture', badge: 'In Progress' },
+      { name: 'Computer Vision' },
+      { name: 'Deep Learning' },
+      { name: 'Image Analysis Pipeline' },
+      { name: 'FastAPI Architecture' },
     ],
     features: [
       'Image upload and preview.',
@@ -223,7 +223,7 @@ export default function ProjectsSection() {
               Things I've <span className="heading-highlight">Built.</span>
             </h2>
             <p className="header-supporting-desc">
-              A collection of projects where engineering meets creativity — from full-stack applications to intelligent AI-powered experiences.
+              Selected web applications, user interfaces, and systems built with React, Node.js, and modern APIs.
             </p>
           </div>
         </div>
@@ -308,11 +308,6 @@ export default function ProjectsSection() {
 
                             {/* OPTICAL LAYER 5: Curved Surface Horizon Falloff & Inset Bezel Shadow */}
                             <div className="optical-curvature-depth" aria-hidden="true" />
-
-                            <div className="mockup-label-overlay">
-                              <Sparkles size={12} color="#10b981" />
-                              <span>Curved Lens Preview</span>
-                            </div>
                           </div>
                         ) : (
                           /* Interactive Fallback Mockup Canvas if image is still generating */

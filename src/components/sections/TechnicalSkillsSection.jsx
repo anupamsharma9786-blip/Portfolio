@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
@@ -14,8 +14,7 @@ import {
   Bot, 
   Smartphone, 
   Atom, 
-  Cpu, 
-  Star
+  Cpu
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -104,21 +103,20 @@ const CATEGORIES_DATA = [
     id: 'devops',
     num: '05',
     title: 'DevOps & Cloud Technologies',
-    badge: 'Core Specialization',
-    isImportant: true,
+    badge: 'Infrastructure',
     desc: 'Containerization, Kubernetes clustering, automated CI/CD pipelines, reverse proxies, and edge cloud hosting.',
-    width: '580px',
+    width: '560px',
     tools: [
-      { name: 'Docker', detail: 'Containerization', devicon: 'devicon-docker-plain colored', badge: 'Core' },
-      { name: 'Kubernetes', detail: 'Orchestration', devicon: 'devicon-kubernetes-plain colored', badge: 'Core' },
-      { name: 'Git & GitHub', detail: 'Version Control', devicon: 'devicon-git-plain colored', badge: 'VCS' },
-      { name: 'GitHub Actions', detail: 'CI/CD Automation', devicon: 'devicon-githubactions-plain colored', badge: 'Pipeline' },
-      { name: 'Linux', detail: 'Server Management', devicon: 'devicon-linux-plain colored', badge: 'OS' },
-      { name: 'Nginx', detail: 'Reverse Proxy', devicon: 'devicon-nginx-original colored', badge: 'Network' },
-      { name: 'CI/CD Pipelines', detail: 'Automated Builds', fallbackIcon: Workflow, badge: 'DevOps' },
-      { name: 'Vercel', detail: 'Frontend Edge Deploy', devicon: 'devicon-vercel-original', badge: 'Cloud' },
-      { name: 'Render', detail: 'Backend Deploy', fallbackIcon: Cloud, badge: 'Cloud' },
-      { name: 'Postman', detail: 'API Testing', devicon: 'devicon-postman-plain colored', badge: 'Testing' },
+      { name: 'Docker', detail: 'Containerization', devicon: 'devicon-docker-plain colored' },
+      { name: 'Kubernetes', detail: 'Orchestration', devicon: 'devicon-kubernetes-plain colored' },
+      { name: 'Git & GitHub', detail: 'Version Control', devicon: 'devicon-git-plain colored' },
+      { name: 'GitHub Actions', detail: 'CI/CD Automation', devicon: 'devicon-githubactions-plain colored' },
+      { name: 'Linux', detail: 'Server Management', devicon: 'devicon-linux-plain colored' },
+      { name: 'Nginx', detail: 'Reverse Proxy', devicon: 'devicon-nginx-original colored' },
+      { name: 'CI/CD Pipelines', detail: 'Automated Builds', fallbackIcon: Workflow },
+      { name: 'Vercel', detail: 'Frontend Edge Deploy', devicon: 'devicon-vercel-original' },
+      { name: 'Render', detail: 'Backend Deploy', fallbackIcon: Cloud },
+      { name: 'Postman', detail: 'API Testing', devicon: 'devicon-postman-plain colored' },
     ]
   },
   {
@@ -142,7 +140,6 @@ const CATEGORIES_DATA = [
 export default function TechnicalSkillsSection() {
   const pinSectionRef = useRef(null);
   const trackRef = useRef(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const pinSection = pinSectionRef.current;
@@ -168,9 +165,6 @@ export default function TechnicalSkillsSection() {
           pin: true,
           scrub: 1.1,
           invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            setScrollProgress(self.progress);
-          }
         }
       });
 
@@ -179,7 +173,7 @@ export default function TechnicalSkillsSection() {
       };
     });
 
-    // MOBILE: Natural Touch Swipe Flow (No vertical pin-trapping)
+    // MOBILE: Natural Touch Swipe Flow
     mm.add('(max-width: 768px)', () => {
       gsap.set(track, { clearProps: 'x,transform' });
     });
@@ -189,49 +183,29 @@ export default function TechnicalSkillsSection() {
 
   return (
     <section id="skills" ref={pinSectionRef} className="horizontal-skills-section-dark">
-      {/* Background Spatial Atmosphere */}
+      {/* Background Atmosphere */}
       <div className="skills-dark-ambient-bg" />
 
       {/* Viewport Container */}
       <div className="horizontal-skills-viewport">
         
-        {/* Top Header Row with Title & Scroll Indicator */}
+        {/* Top Header Row with Title */}
         <div className="horizontal-skills-header-row">
           <div>
             <h2 className="tech-dark-title">Technical Skills</h2>
           </div>
-
-          <div className="horizontal-progress-indicator">
-            <div className="progress-bar-track">
-              <div 
-                className="progress-bar-fill" 
-                style={{ width: `${Math.round(scrollProgress * 100)}%` }}
-              />
-            </div>
-            <span className="progress-pct-num">{Math.round(scrollProgress * 100)}%</span>
-          </div>
         </div>
 
-        {/* 3D Perspective Stage Container */}
+        {/* Horizontal Cards Stage */}
         <div className="perspective-3d-stage">
           <div ref={trackRef} className="horizontal-cards-track">
             {CATEGORIES_DATA.map((cat) => {
-              const isDevOps = cat.isImportant;
-
               return (
                 <div
                   key={cat.id}
                   style={{ '--card-width': cat.width }}
-                  className={`spatial-3d-card ${isDevOps ? 'spatial-card-devops' : ''}`}
+                  className="spatial-3d-card"
                 >
-                  {/* Important Category Banner */}
-                  {isDevOps && (
-                    <div className="devops-3d-banner">
-                      <Star size={12} className="star-bounce" />
-                      <span>IMPORTANT CATEGORY — CONTAINERIZATION & DEVOPS</span>
-                    </div>
-                  )}
-
                   {/* Card Header */}
                   <div className="spatial-card-header">
                     <div>
@@ -245,14 +219,10 @@ export default function TechnicalSkillsSection() {
                       <h3 className="spatial-cat-title">{cat.title}</h3>
                       <p className="spatial-cat-desc">{cat.desc}</p>
                     </div>
-
-                    <div className="spatial-tools-count">
-                      <span>{cat.tools.length} Tools</span>
-                    </div>
                   </div>
 
-                  {/* Tools Grid with Multi-layer 3D Lift */}
-                  <div className={`spatial-tools-grid ${isDevOps ? 'devops-grid-extended' : ''}`}>
+                  {/* Tools Grid */}
+                  <div className={`spatial-tools-grid ${cat.id === 'devops' ? 'devops-grid-extended' : ''}`}>
                     {cat.tools.map((tool, tIdx) => (
                       <div key={tIdx} className="spatial-tool-item">
                         <div className="spatial-tool-icon-box">
@@ -265,9 +235,6 @@ export default function TechnicalSkillsSection() {
                         <div className="spatial-tool-info">
                           <div className="spatial-tool-top">
                             <span className="spatial-tool-name">{tool.name}</span>
-                            {tool.badge && (
-                              <span className="spatial-tool-pill">{tool.badge}</span>
-                            )}
                           </div>
                           <span className="spatial-tool-detail">{tool.detail}</span>
                         </div>

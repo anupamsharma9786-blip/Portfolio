@@ -312,33 +312,6 @@ export default function ContactSection() {
               ------------------------------------- */}
           <div className="contact-form-column">
             <div className="contact-card message-terminal-card">
-              {/* Decorative Sketched Circular Stamp Doodle */}
-              <div className="doodle-stamp-container" aria-hidden="true">
-                <svg
-                  className="doodle-stamp-circle"
-                  viewBox="0 0 80 80"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="40"
-                    cy="40"
-                    r="36"
-                    stroke="#10b981"
-                    strokeWidth="1.8"
-                    strokeDasharray="4 3"
-                  />
-                  <path
-                    d="M26 40L35 49L54 29"
-                    stroke="#10b981"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <span className="doodle-stamp-text">DIRECT DISPATCH</span>
-              </div>
-
               <div className="card-top-header">
                 <div className="card-icon-bubble">
                   <Send size={18} className="icon-emerald" />
@@ -412,7 +385,7 @@ export default function ContactSection() {
                   type="submit"
                   className="form-submit-btn"
                 >
-                  <span>Transmit Message</span>
+                  <span>Send Message</span>
                   <Send size={15} className="submit-icon" />
                 </button>
 

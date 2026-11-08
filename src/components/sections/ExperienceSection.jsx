@@ -109,7 +109,7 @@ export default function ExperienceSection() {
         <div className="experience-dark-header">
           <div className="experience-label-chip">
             <GitBranch size={13} className="chip-branch-icon" />
-            <span className="chip-label-text">CAREER JOURNEY // GIT TIMELINE</span>
+            <span className="chip-label-text">CAREER JOURNEY</span>
             <span className="chip-branch-name">main</span>
           </div>
 
@@ -214,9 +214,6 @@ export default function ExperienceSection() {
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    {/* Glass Surface Specular Shimmer */}
-                    <div className="glass-specular-highlight" />
-
                     {/* Card Top Metadata Ribbon */}
                     <div className="glass-card-topbar">
                       <div className="topbar-left">
@@ -291,12 +288,6 @@ export default function ExperienceSection() {
                 </div>
               );
             })}
-          </div>
-
-          {/* Clean Branch Termination */}
-          <div className="timeline-branch-end">
-            <span className="branch-end-dot" />
-            <span className="branch-end-label">origin/main — tree up to date</span>
           </div>
         </div>
 
