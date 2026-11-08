@@ -3,12 +3,20 @@ import CanvasScrollAnimation from './components/CanvasScrollAnimation';
 import HeroTitleOverlay from './components/HeroTitleOverlay';
 import HeroPerspectiveText from './components/HeroPerspectiveText';
 import TechnicalSkillsSection from './components/sections/TechnicalSkillsSection';
+import ProjectsSection from './components/sections/ProjectsSection';
+import ExperienceSection from './components/sections/ExperienceSection';
+import ContactSection from './components/sections/ContactSection';
+
+import TopRightNav from './components/TopRightNav';
 
 export default function App() {
   const heroRef = useRef(null);
 
   return (
     <div className="portfolio-app">
+      {/* Permanent Fixed Top-Right Navigation Bar (Visible across all sections) */}
+      <TopRightNav />
+
       {/* =========================================
           HERO SECTION: 
           Pinned scroll track driving the 179-frame
@@ -35,6 +43,28 @@ export default function App() {
           with Devicon brand icons and DevOps spotlight.
           ========================================= */}
       <TechnicalSkillsSection />
+
+      {/* =========================================
+          FEATURED PROJECTS SHOWCASE (WHITE THEME):
+          Interactive horizontal product showcase
+          with large browser UI mockups & editorial layout.
+          ========================================= */}
+      <ProjectsSection />
+
+      {/* =========================================
+          EXPERIENCE SECTION (GIT COMMIT TIMELINE):
+          Interactive vertical development history
+          with animated Git branch lines & commit nodes.
+          ========================================= */}
+      <ExperienceSection />
+
+      {/* =========================================
+          CONTACT SECTION (WHITE & NEON GREEN THEME):
+          Creative editorial contact experience with
+          interactive copy email, timezone clock, message terminal,
+          and playful hand-drawn SVG doodles.
+          ========================================= */}
+      <ContactSection />
     </div>
   );
 }

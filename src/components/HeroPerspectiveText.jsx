@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import HeroSocialLinks from './HeroSocialLinks';
 
 export default function HeroPerspectiveText({ heroRef }) {
   // Track scroll progress of the hero section container (0.0 to 1.0)
@@ -81,6 +82,16 @@ export default function HeroPerspectiveText({ heroRef }) {
         >
           From interactive frontend interfaces to robust backend architectures, I love working across the entire development lifecycle. I believe in <span className="highlight-text">learning by building</span>, solving real-world problems, and turning ideas into resilient digital solutions.
         </motion.p>
+
+        {/* Hero Contact & Social Links appended directly to introduction */}
+        <motion.div
+          style={{
+            opacity: p3Opacity,
+            y: p3Y,
+          }}
+        >
+          <HeroSocialLinks className="hero-intro-socials" />
+        </motion.div>
       </motion.div>
     </div>
   );
